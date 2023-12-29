@@ -1,5 +1,6 @@
 import turtle
 import pygame
+import random
 from tkinter import *
 from tkinter import ttk
 t = turtle.Turtle()
@@ -8,87 +9,112 @@ def main():
 
     # pygame setup
     pygame.init()
-    white = (255, 255, 255)
-    green = (0, 255, 0)
-    blue = (0, 0, 128)
-    font = pygame.font.Font('freesansbold.ttf', 32)
-    text = font.render('GeeksForGeeks', True, green, blue)
-    textRect = text.get_rect()
-
-    screen = pygame.display.set_mode((1280, 720))
-
-    screen.blit(text, textRect)
-    pygame.display.update()
-    clock = pygame.time.Clock()
-    running = True
-    dt = 0
-    pi = 3.14
-
-    player_pos = pygame.Vector2((screen.get_width() / 2), screen.get_height() / 2)
-    player_pos_2 = pygame.Vector2((screen.get_width() / 2), (screen.get_height() / 2) - 30)
-    player_2_pos = pygame.Vector2((screen.get_height() / 4), (screen.get_width() / 4) - 30)
-    player_1_list = [player_pos, player_pos_2]
-
-    while running:
-        # poll for events
-        # pygame.QUIT event means the user clicked X to close your window
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                running = False
-
-        # fill the screen with a color to wipe away anything from last frame
-        screen.fill("purple")
-
-        pygame.draw.circle(screen, "red", player_pos, 40)
-        pygame.draw.circle(screen, "red", player_pos_2, 40)
-        pygame.draw.circle(screen, "green", player_2_pos, 40)
+    matching_game.__init__('self')
 
 
-        keys = pygame.key.get_pressed()
-        Card_2(screen)
-        if keys[pygame.K_w]:
-            player_pos.y -= 300 * dt
-            player_pos_2.y -= 300 * dt
-        if keys[pygame.K_s]:
-            player_pos.y += 300 * dt
-            player_pos_2.y += 300 * dt
-        if keys[pygame.K_a]:
-            player_pos.x -= 300 * dt
-            player_pos_2.x -= 300 * dt
-        if keys[pygame.K_d]:
-            player_pos.x += 300 * dt
-            player_pos_2.x += 300 * dt
-        if keys[pygame.K_LEFT]:
-            player_2_pos.x -= 300 * dt
-        if keys[pygame.K_RIGHT]:
-            player_2_pos.x += 300 * dt
-        if keys[pygame.K_UP]:
-            player_2_pos.y -= 300 * dt
-        if keys[pygame.K_DOWN]:
-            player_2_pos.y += 300 * dt
 
-        # flip() the display to put your work on screen
-        pygame.display.flip()
+class matching_game:
+    def __init__(self):
 
-        # limits FPS to 60
-        # dt is delta time in seconds since last frame, used for framerate-
-        # independent physics.
-        dt = clock.tick(60) / 1000
+        screen = pygame.display.set_mode((1280, 720))
+        pygame.display.set_caption('Show Text')
 
-        # RENDER YOUR GAME HERE
+        pygame.display.update()
+        clock = pygame.time.Clock()
+        running = True
+        dt = 0
+        pi = 3.14
 
-        # flip() the display to put your work on screen
-        pygame.display.flip()
+        Players.__init__('self', screen, running, clock)
 
-        clock.tick(60)  # limits FPS to 60
 
-    pygame.quit()
 
-    #Config_practice.button("")
-    #FeetToMeters(root)
 
-    # print_hierarchy(root)
-    #root.mainloop()
+class Players:
+    def __init__(self, screen, running, clock):
+        player_pos = pygame.Vector2((screen.get_width() / 2), screen.get_height() / 2)
+        player_pos_2 = pygame.Vector2((screen.get_width() / 2), (screen.get_height() / 2) - 30)
+        player_2_pos = pygame.Vector2((screen.get_height() / 4), (screen.get_width() / 4) - 30)
+
+        while running:
+            # poll for events
+            # pygame.QUIT event means the user clicked X to close your window
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    running = False
+
+            # fill the screen with a color to wipe away anything from last frame
+            screen.fill("purple")
+
+
+
+
+
+            pygame.draw.circle(screen, "red", player_pos, 40)
+            pygame.draw.circle(screen, "red", player_pos_2, 40)
+            pygame.draw.circle(screen, "green", player_2_pos, 40)
+
+
+            keys = pygame.key.get_pressed()
+            player_1_y_list = []
+            player_1_2_y_list = []
+            player_1_x_list = []
+            player_1_2_x_list = []
+            Card_2(screen)
+            if keys[pygame.K_w]:
+                player_pos.y -= 200 * dt
+                player_pos_2.y -= 200 * dt
+                player_1_y_list.append(player_pos)
+                player_1_2_y_list.append(player_pos_2)
+            if keys[pygame.K_s]:
+                player_pos.y += 200 * dt
+                player_pos_2.y += 200 * dt
+                player_1_y_list.append(player_pos)
+                player_1_2_y_list.append(player_pos_2)
+            if keys[pygame.K_a]:
+                player_pos.x -= 200 * dt
+                player_pos_2.x -= 200 * dt
+                player_1_x_list.append(player_pos)
+                player_1_2_x_list.append(player_pos)
+            if keys[pygame.K_d]:
+                player_pos.x += 200 * dt
+                player_pos_2.x += 200 * dt
+            if keys[pygame.K_LEFT]:
+                player_2_pos.x -= 200 * dt
+            if keys[pygame.K_RIGHT]:
+                player_2_pos.x += 200 * dt
+            if keys[pygame.K_UP]:
+                player_2_pos.y -= 200 * dt
+            if keys[pygame.K_DOWN]:
+                player_2_pos.y += 200 * dt
+
+
+            pygame.draw.circle(screen, "red", player_pos, 40)
+            pygame.draw.circle(screen, "red", player_pos_2, 40)
+            pygame.draw.circle(screen, "green", player_2_pos, 40)
+            # flip() the display to put your work on screen
+            pygame.display.flip()
+
+            # limits FPS to 60
+            # dt is delta time in seconds since last frame, used for framerate-
+            # independent physics.
+            dt = clock.tick(60) / 1000
+
+            # RENDER YOUR GAME HERE
+
+            # flip() the display to put your work on screen
+            pygame.display.flip()
+
+            clock.tick(60)  # limits FPS to 60
+
+        pygame.quit()
+
+        #Config_practice.button("")
+        #FeetToMeters(root)
+
+        # print_hierarchy(root)
+        #root.mainloop()
+
 
 class Card_2:
     def __init__(self, screen):
@@ -103,15 +129,33 @@ class Card_2:
         card_width = 250
         card_height = 200
         card_number = 0
+
+        white = (255, 255, 255)
+        green = (0, 255, 0)
+        blue = (0, 0, 128)
+        X = 280
+        Y = 220
+        card_number_1 = 0
+        card_list = []
+        x_list = []
+        y_list = []
+        number = str(card_number_1)
+        font = pygame.font.Font('freesansbold.ttf', 50)
+        text = font.render(number, True, green, blue)
+        Card_2.random_math('self')
+
         for i in range(12):
+            card_list.append(card_number)
+            x_list.append(X)
+            y_list.append(Y)
             if card_number == 0:
                 modifier_x = 90
                 modifier_y = 25
-                one_image = pygame.image.load("1.png")
-                one_image = pygame.transform.scale(one_image, (50, 50))
             if card_number == 1:
                 modifier_x = 0
                 modifier_y = 220
+                one_image = pygame.image.load("1.png")
+                one_image = pygame.transform.scale(one_image, (50, 50))
             if card_number == 2:
                 modifier_x = 0
                 modifier_y = 220
@@ -144,17 +188,81 @@ class Card_2:
                 modifier_y = -220
 
             card_number += 1
+            X += modifier_x*2
+            Y += modifier_y*2
             rect_pos_changer_x = rect_pos_1[0] + modifier_x
             rect_pos_changer_y = rect_pos_1[1] + modifier_y
+            keys = pygame.key.get_pressed()
 
+
+            card_number_1 += 1
+            number = str(card_number_1)
+            font = pygame.font.Font('freesansbold.ttf', 60)
+            text = font.render(number, True, green, blue)
+            textRect = text.get_rect()
+            textRect.center = (X // 2, Y // 2)
+            screen.blit(text, textRect)
 
             rect_pos_1 = [rect_pos_changer_x, rect_pos_changer_y, card_width, card_height]
 
             pygame.draw.ellipse(screen, 'blue', rect_pos_1, 20)
             pygame.draw.rect(screen, 'blue', rect_pos_1, 20)
             one_image = pygame.image.load("1.png")
+            zero_image = pygame.image.load("0_image.jpg")
             one_image = pygame.transform.scale(one_image, (50, 50))
+            zero_image = pygame.transform.scale(zero_image, (200, 100))
             #print(one_image)
+
+
+
+
+            #surface_1.fill((50, 50, 50))
+            #rect = surface_1.get_rect()
+
+        card_matched = False
+        choices = []
+        for i in range(2):
+            choices.append(i)
+        choice_1 = choices[0]
+        choice_2 = choices[1]
+        if choice_1 == choice_2:
+            card_matched = True
+        else:
+            pass
+
+
+
+        if keys[pygame.K_1]:
+            press_number.__init__('self', 1)
+            surface_1 = pygame.Surface.blit(screen, zero_image, (100, 50))
+            surface_1.fit(surface_1)
+            Card_2.random_math(self)
+
+        if keys[pygame.K_2]:
+            press_number.__init__('self', 2)
+            Card_2.random_math(self)
+        if keys[pygame.K_3]:
+            press_number.__init__(3)
+        if keys[pygame.K_4]:
+            press_number.__init__(4)
+        if keys[pygame.K_5]:
+            press_number.__init__(5)
+        if keys[pygame.K_6]:
+            press_number.__init__(6)
+        if keys[pygame.K_7]:
+            press_number.__init__(7)
+        if keys[pygame.K_8]:
+            press_number.__init__(8)
+        if keys[pygame.K_9]:
+            press_number.__init__(9)
+        if keys[pygame.K_z]:
+            press_number.__init__(10)
+        if keys[pygame.K_x]:
+            press_number.__init__(11)
+        if keys[pygame.K_c]:
+            press_number.__init__(12)
+
+
         #pygame.draw.
         #pygame.draw.line(screen, 'blue', [base_y_top/8 - 75, base_y_top*0.2],
         #                 [base_y_top/8 - 75, (base_y_top * 0.05)], 5)
@@ -176,6 +284,73 @@ class Card_2:
     def zero_plus_zero(self):
         #pygame.draw.line(screen, 'blue', )
         pygame.draw.arc(screen, 'red', [10, 10, 250, 200], 6, 7, 2)
+    def random_math(self):
+        matcher = []
+        matcher_dict = {}
+        level_0a_equa = ['0 + 0 =', '0 + 1 =', '0 + 2 =', '0 + 3 =', '0 + 4 =', '0 + 5 =']
+        level_0a_ans = ['0', '1', '2', '3', '4', '5']
+        level_0b_equa = ['0 + 6 =', '0 + 7 =', '0 + 8 =', '0 + 9 =', '0 + 10 =']
+        level_0b_ans = ['6', '7', '8', '9', '10']
+
+
+
+        def leveler_defined(leveler):
+            try:
+                if leveler == 0:
+                    level = '0a'
+                if level == '0a'.lower():
+                    random.shuffle(level_0a_equa)
+                    random.shuffle(level_0a_ans)
+                    all_shuffled = level_0a_equa + level_0a_ans
+                    level = '1'
+                leveler = 1
+            except:
+                leveler = 0
+                leveler_defined(leveler)
+
+        try:
+            matched = all_shuffled[0]
+            print(matched)
+            font = pygame.font.Font('freesansbold.ttf', 60)
+            green = (0, 255, 0)
+            blue = (0, 0, 128)
+            text = font.render(matched, True, green, blue)
+            surface_1 = pygame.Surface.blit(screen, matched, (100, 50))
+            surface_1.fit(surface_1)
+
+            #screen = pygame.surface.Surface((600, 40))
+            textRect = text.get_rect()
+            textRect.center = (X // 2, Y // 2)
+            screen.blit(text, textRect)
+            print("matched")
+            #number = matcher_dict
+        except:
+            leveler_defined(500)
+
+class press_number:
+    def __int__(self, num):
+        press_number.image_loader(num)
+        pygame.draw.circle(screen, "red", player_pos+40, 40)
+        pygame.draw.circle(screen, "red", player_pos_2+40, 40)
+        pygame.draw.circle(screen, "green", player_2_pos+40, 40)
+
+    def image_loader(self, num):
+        one_image = pygame.image.load("1.png")
+        one_image = pygame.transform.scale(one_image, (50, 50))
+        surface_1 = pygame.Surface.blit(screen, one_image, (100, 50))
+        font = pygame.font.Font('freesansbold.ttf', 60)
+        text = font.render(number, True, green, blue)
+        textRect = text.get_rect()
+        x_list.append(X)
+        y_list.append(Y)
+        X = x_list[num]
+        Y = y_list[num]
+        textRect.center = (X // 2, Y // 2)
+
+
+
+
+
 
 
 
