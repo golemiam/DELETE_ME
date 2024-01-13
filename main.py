@@ -17,15 +17,19 @@ class matching_game:
     def __init__(self):
 
         screen = pygame.display.set_mode((1280, 720))
+        Card_2.random_math('self', screen)
         pygame.display.set_caption('Show Text')
 
         pygame.display.update()
         clock = pygame.time.Clock()
         running = True
-        dt = 0
-        pi = 3.14
+        #dt = 0
+        #pi = 3.14
 
         Players.__init__('self', screen, running, clock)
+
+        #Card_2.__init__("self", screen)
+        #Card_2.leveler_defined(leveler)
 
 
 
@@ -37,6 +41,7 @@ class Players:
         player_2_pos = pygame.Vector2((screen.get_height() / 4), (screen.get_width() / 4) - 30)
 
         while running:
+
             # poll for events
             # pygame.QUIT event means the user clicked X to close your window
             for event in pygame.event.get():
@@ -45,6 +50,7 @@ class Players:
 
             # fill the screen with a color to wipe away anything from last frame
             screen.fill("purple")
+
 
 
 
@@ -60,7 +66,8 @@ class Players:
             player_1_2_y_list = []
             player_1_x_list = []
             player_1_2_x_list = []
-            Card_2(screen)
+            Card_2.__init__("self", screen)
+
             if keys[pygame.K_w]:
                 player_pos.y -= 200 * dt
                 player_pos_2.y -= 200 * dt
@@ -79,6 +86,8 @@ class Players:
             if keys[pygame.K_d]:
                 player_pos.x += 200 * dt
                 player_pos_2.x += 200 * dt
+                player_1_y_list.append(player_pos)
+                player_1_2_y_list.append(player_pos_2)
             if keys[pygame.K_LEFT]:
                 player_2_pos.x -= 200 * dt
             if keys[pygame.K_RIGHT]:
@@ -92,8 +101,19 @@ class Players:
             pygame.draw.circle(screen, "red", player_pos, 40)
             pygame.draw.circle(screen, "red", player_pos_2, 40)
             pygame.draw.circle(screen, "green", player_2_pos, 40)
+            try:
+                tail_1_x = player_1_x_list[-4]
+                tail_1_y= player_1_y_list[-4]
+                new_player_pos = pygame.Vector2(tail_1_x, tail_1_y)
+                pygame.draw.circle(screen, "red", new_player_pos, 40)
+            except:
+                pass
+
+
+
             # flip() the display to put your work on screen
             pygame.display.flip()
+
 
             # limits FPS to 60
             # dt is delta time in seconds since last frame, used for framerate-
@@ -103,7 +123,7 @@ class Players:
             # RENDER YOUR GAME HERE
 
             # flip() the display to put your work on screen
-            pygame.display.flip()
+
 
             clock.tick(60)  # limits FPS to 60
 
@@ -119,6 +139,7 @@ class Players:
 class Card_2:
     def __init__(self, screen):
         Card_2.card_grid("self", screen)
+
     def card_grid(self, screen):
         #pygame.draw.line(screen, 'blue', [(screen.get_height() / 2), (base_y_top / 2)], [(screen.get_height() / 2), (base_y_top / 4)], 5)
         base_x_top = screen.get_height()
@@ -129,6 +150,7 @@ class Card_2:
         card_width = 250
         card_height = 200
         card_number = 0
+
 
         white = (255, 255, 255)
         green = (0, 255, 0)
@@ -142,7 +164,8 @@ class Card_2:
         number = str(card_number_1)
         font = pygame.font.Font('freesansbold.ttf', 50)
         text = font.render(number, True, green, blue)
-        Card_2.random_math('self')
+
+
 
         for i in range(12):
             card_list.append(card_number)
@@ -195,6 +218,7 @@ class Card_2:
             keys = pygame.key.get_pressed()
 
 
+
             card_number_1 += 1
             number = str(card_number_1)
             font = pygame.font.Font('freesansbold.ttf', 60)
@@ -211,7 +235,7 @@ class Card_2:
             zero_image = pygame.image.load("0_image.jpg")
             one_image = pygame.transform.scale(one_image, (50, 50))
             zero_image = pygame.transform.scale(zero_image, (200, 100))
-            #print(one_image)
+
 
 
 
@@ -230,17 +254,23 @@ class Card_2:
         else:
             pass
 
-
+        V = 100
+        W = 50
 
         if keys[pygame.K_1]:
             press_number.__init__('self', 1)
-            surface_1 = pygame.Surface.blit(screen, zero_image, (100, 50))
+            surface_1 = pygame.Surface.blit(screen, zero_image, (V, W))
             surface_1.fit(surface_1)
-            Card_2.random_math(self)
 
         if keys[pygame.K_2]:
             press_number.__init__('self', 2)
-            Card_2.random_math(self)
+            V += 100
+            W += 100
+            surface_1 = pygame.Surface.blit(screen, zero_image, (V, W))
+            surface_1.fit(surface_1)
+            textRect = text.get_rect()
+            textRect.center = (X // 2, Y // 2)
+            screen.blit(text, textRect)
         if keys[pygame.K_3]:
             press_number.__init__(3)
         if keys[pygame.K_4]:
@@ -261,7 +291,7 @@ class Card_2:
             press_number.__init__(11)
         if keys[pygame.K_c]:
             press_number.__init__(12)
-
+        #Card_2.random_math("self", screen)
 
         #pygame.draw.
         #pygame.draw.line(screen, 'blue', [base_y_top/8 - 75, base_y_top*0.2],
@@ -284,29 +314,51 @@ class Card_2:
     def zero_plus_zero(self):
         #pygame.draw.line(screen, 'blue', )
         pygame.draw.arc(screen, 'red', [10, 10, 250, 200], 6, 7, 2)
-    def random_math(self):
+    def random_math(self, screen):
         matcher = []
         matcher_dict = {}
-        level_0a_equa = ['0 + 0 =', '0 + 1 =', '0 + 2 =', '0 + 3 =', '0 + 4 =', '0 + 5 =']
-        level_0a_ans = ['0', '1', '2', '3', '4', '5']
-        level_0b_equa = ['0 + 6 =', '0 + 7 =', '0 + 8 =', '0 + 9 =', '0 + 10 =']
-        level_0b_ans = ['6', '7', '8', '9', '10']
+        Card_2.leveler_defined(0, screen)
+        try:
+            if leveler == 0:
+                Card_2.leveler_defined(leveler)
+            elif leveler == '0a':
+                Card_2.leveler_defined(leveler)
+            elif leveler.str() == '1':
+                leveler = 500
+                Card_2.leveler_defined(leveler)
+            else:
+                leveler = 500
 
+        except:
+            #Card_2.leveler_defined(500)
+            pass
 
-
-        def leveler_defined(leveler):
-            try:
-                if leveler == 0:
-                    level = '0a'
-                if level == '0a'.lower():
-                    random.shuffle(level_0a_equa)
-                    random.shuffle(level_0a_ans)
-                    all_shuffled = level_0a_equa + level_0a_ans
-                    level = '1'
+    def leveler_defined(leveler, screen):
+        try:
+            if leveler == 0:
+                level = '0a'
+            if level == '0a'.lower():
+                pygame.draw.arc(screen, 'red', [10, 10, 250, 200], 6, 7, 2)
+                level_0a_equa = ['0 + 0 =', '0 + 1 =', '0 + 2 =', '0 + 3 =', '0 + 4 =', '0 + 5 =']
+                level_0a_ans = ['0', '1', '2', '3', '4', '5']
+                level_0b_equa = ['0 + 6 =', '0 + 7 =', '0 + 8 =', '0 + 9 =', '0 + 10 =']
+                level_0b_ans = ['6', '7', '8', '9', '10']
+                random.shuffle(level_0a_equa)
+                random.shuffle(level_0a_ans)
+                all_shuffled = level_0a_equa + level_0a_ans
+                card_value = all_shuffled[1]
+                level = '1'
                 leveler = 1
-            except:
+                return card_value
+        except:
+            if leveler == 1:
+                pass
+            else:
                 leveler = 0
-                leveler_defined(leveler)
+                #Card_2.leveler_defined(leveler, screen)
+
+        #print(all_shuffled)
+
 
         try:
             matched = all_shuffled[0]
@@ -318,23 +370,35 @@ class Card_2:
             surface_1 = pygame.Surface.blit(screen, matched, (100, 50))
             surface_1.fit(surface_1)
 
-            #screen = pygame.surface.Surface((600, 40))
+            screen = pygame.surface.Surface((600, 40))
             textRect = text.get_rect()
             textRect.center = (X // 2, Y // 2)
             screen.blit(text, textRect)
             print("matched")
             #number = matcher_dict
         except:
-            leveler_defined(500)
+            #Card_2.leveler_defined(500, screen)
+            pass
 
 class press_number:
     def __int__(self, num):
-        press_number.image_loader(num)
+        Card_2.leveler_defined(leveler)
+        matched = card_value
+        text = font.render(matched, True, green, blue)
+        surface_1 = pygame.Surface.blit(screen, matched, (100, 50))
+        surface_1.fit(surface_1)
+        textRect = text.get_rect()
+        textRect.center = (X // 2, Y // 2)
+        screen.blit(text, textRect)
+
+        #press_number.image_loader(num)
         pygame.draw.circle(screen, "red", player_pos+40, 40)
         pygame.draw.circle(screen, "red", player_pos_2+40, 40)
         pygame.draw.circle(screen, "green", player_2_pos+40, 40)
 
+
     def image_loader(self, num):
+
         one_image = pygame.image.load("1.png")
         one_image = pygame.transform.scale(one_image, (50, 50))
         surface_1 = pygame.Surface.blit(screen, one_image, (100, 50))
@@ -346,6 +410,7 @@ class press_number:
         X = x_list[num]
         Y = y_list[num]
         textRect.center = (X // 2, Y // 2)
+
 
 
 
