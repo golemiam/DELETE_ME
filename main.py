@@ -22,7 +22,9 @@ class matching_game:
     """
     def __init__(self):
 
+
         screen = pygame.display.set_mode((1280, 720))
+
         Math.__init__('self', screen)
         pygame.display.set_caption('Show Text')
 
@@ -55,6 +57,11 @@ class Players:
         player_pos = pygame.Vector2((screen.get_width() / 2), screen.get_height() / 2)
         player_pos_2 = pygame.Vector2((screen.get_width() / 2), (screen.get_height() / 2) - 30)
         player_2_pos = pygame.Vector2((screen.get_height() / 4), (screen.get_width() / 4) - 30)
+        player_3_pos = pygame.Vector2((screen.get_height() / 2 - 40), (screen.get_width() / 4) - 70)
+        player_3_pos_2 = pygame.Vector2((screen.get_width() / 4), (screen.get_height() / 3) - 40)
+        player_4_pos = pygame.Vector2((screen.get_height()*3 / 4), (screen.get_width() / 2) - 70)
+        player_4_pos_2 = pygame.Vector2((screen.get_width()*2 / 4 - 40), (screen.get_height()*7 / 8 + 30) - 100)
+
 
         while running:
 
@@ -75,6 +82,10 @@ class Players:
             pygame.draw.circle(screen, "red", player_pos, 40)
             pygame.draw.circle(screen, "red", player_pos_2, 40)
             pygame.draw.circle(screen, "green", player_2_pos, 40)
+            pygame.draw.circle(screen, "orange", player_3_pos, 40)
+            pygame.draw.circle(screen, "orange", player_3_pos_2, 40)
+            pygame.draw.circle(screen, "light blue", player_4_pos, 40)
+            pygame.draw.circle(screen, "light blue", player_4_pos_2, 40)
 
 
             keys = pygame.key.get_pressed()
@@ -120,11 +131,55 @@ class Players:
             if keys[pygame.K_DOWN]:
                 # Moves player 2 down on the screen.
                 player_2_pos.y += 200 * dt
+            if keys[pygame.K_i]:
+                # Moves player 1 up on the screen.
+                player_3_pos.y -= 200 * dt
+                player_3_pos_2.y -= 200 * dt
+            if keys[pygame.K_k]:
+                # Moves player 1 down on the screen.
+                player_3_pos.y += 200 * dt
+                player_3_pos_2.y += 200 * dt
+                player_1_y_list.append(player_pos)
+                player_1_2_y_list.append(player_pos_2)
+            if keys[pygame.K_j]:
+                # Moves player 1 left on the screen.
+                player_3_pos.x -= 200 * dt
+                player_3_pos_2.x -= 200 * dt
+                player_1_x_list.append(player_pos)
+                player_1_2_x_list.append(player_pos)
+            if keys[pygame.K_l]:
+                # Moves player 1 right on the screen.
+                player_3_pos.x += 200 * dt
+                player_3_pos_2.x += 200 * dt
+                player_1_y_list.append(player_pos)
+                player_1_2_y_list.append(player_pos_2)
+            if keys[pygame.K_t]:
+                # Moves player 1 up on the screen.
+                player_4_pos.y -= 200 * dt
+                player_4_pos_2.y -= 200 * dt
+            if keys[pygame.K_g]:
+                # Moves player 1 down on the screen.
+                player_4_pos.y += 200 * dt
+                player_4_pos_2.y += 200 * dt
+                player_1_y_list.append(player_pos)
+                player_1_2_y_list.append(player_pos_2)
+            if keys[pygame.K_f]:
+                # Moves player 1 left on the screen.
+                player_4_pos.x -= 200 * dt
+                player_4_pos_2.x -= 200 * dt
+                player_1_x_list.append(player_pos)
+                player_1_2_x_list.append(player_pos)
+            if keys[pygame.K_h]:
+                # Moves player 1 right on the screen.
+                player_4_pos.x += 200 * dt
+                player_4_pos_2.x += 200 * dt
+                player_1_y_list.append(player_pos)
+                player_1_2_y_list.append(player_pos_2)
 
 
-            pygame.draw.circle(screen, "red", player_pos, 40)
-            pygame.draw.circle(screen, "red", player_pos_2, 40)
-            pygame.draw.circle(screen, "green", player_2_pos, 40)
+            #pygame.draw.circle(screen, "red", player_pos, 40)
+            #pygame.draw.circle(screen, "red", player_pos_2, 40)
+            #pygame.draw.circle(screen, "green", player_2_pos, 40)
             try:
                 tail_1_x = player_1_x_list[-4]
                 tail_1_y= player_1_y_list[-4]
@@ -265,44 +320,76 @@ class Card_2:
         green = (0, 255, 0)
         blue = (0, 0, 128)
         keys = pygame.key.get_pressed()
+
         if keys[pygame.K_1]:
-            press_number.__init__('self', 1)
+            V = 150
+            W = 150
+            press_number.__init__('self', 1, screen, V, W)
+            """
             number = str(100)
             font = pygame.font.Font('freesansbold.ttf', 60)
             text = font.render(number, True, green, blue)
             textRect = text.get_rect()
-            textRect.center = (X // 2, Y // 2)
+            textRect.center = (X + 100, Y + 100)
             screen.blit(text, textRect)
+            """
 
         if keys[pygame.K_2]:
-            press_number.__init__('self', 2)
-            V += 100
-            W += 100
-            surface_1 = pygame.Surface.blit(screen, zero_image, (V, W))
-            surface_1.fit(surface_1)
+            V = 150
+            W = 150
+            press_number.__init__('self', 1, screen, V, W)
+            """
+            #V += 100
+            #W += 100
+            #surface_1 = pygame.Surface.blit(screen, zero_image, (V, W))
+            #surface_1.fit(surface_1)
+            number = str(100)
+            font = pygame.font.Font('freesansbold.ttf', 60)
+            text = font.render(number, True, green, blue)
             textRect = text.get_rect()
-            textRect.center = (X // 2, Y // 2)
+            textRect.center = (X, Y)
             screen.blit(text, textRect)
+            """
         if keys[pygame.K_3]:
-            press_number.__init__(3)
+            V = 150
+            W = 150
+            press_number.__init__('self', 1, screen, V, W)
         if keys[pygame.K_4]:
-            press_number.__init__(4)
+            V = 150
+            W = 150
+            press_number.__init__('self', 1, screen, V, W)
         if keys[pygame.K_5]:
-            press_number.__init__(5)
+            V = 150
+            W = 150
+            press_number.__init__('self', 1, screen, V, W)
         if keys[pygame.K_6]:
-            press_number.__init__(6)
+            V = 150
+            W = 150
+            press_number.__init__('self', 1, screen, V, W)
         if keys[pygame.K_7]:
-            press_number.__init__(7)
+            V = 150
+            W = 150
+            press_number.__init__('self', 1, screen, V, W)
         if keys[pygame.K_8]:
-            press_number.__init__(8)
+            V = 150
+            W = 150
+            press_number.__init__('self', 1, screen, V, W)
         if keys[pygame.K_9]:
-            press_number.__init__(9)
+            V = 150
+            W = 150
+            press_number.__init__('self', 1, screen, V, W)
         if keys[pygame.K_z]:
-            press_number.__init__(10)
+            V = 150
+            W = 150
+            press_number.__init__('self', 1, screen, V, W)
         if keys[pygame.K_x]:
-            press_number.__init__(11)
+            V = 150
+            W = 150
+            press_number.__init__('self', 1, screen, V, W)
         if keys[pygame.K_c]:
-            press_number.__init__(12)
+            V = 150
+            W = 150
+            press_number.__init__('self', 1, screen, V, W)
 
         number = str(card_number)
         font = pygame.font.Font('freesansbold.ttf', 60)
@@ -451,6 +538,7 @@ class Card_2:
 
         if keys[pygame.K_1]:
             press_number.__init__('self', 1)
+            """
             surface_1 = pygame.Surface.blit(screen, zero_image, (V, W))
             surface_1.fit(surface_1)
             number = str(100)
@@ -458,10 +546,12 @@ class Card_2:
             text = font.render(number, True, green, blue)
             textRect = text.get_rect()
             textRect.center = (X // 2, Y // 2)
-            screen.blit(text, textRect)
+            #screen.blit(text, textRect)
+            """
 
         if keys[pygame.K_2]:
             press_number.__init__('self', 2)
+            """
             V += 100
             W += 100
             surface_1 = pygame.Surface.blit(screen, zero_image, (V, W))
@@ -469,6 +559,7 @@ class Card_2:
             textRect = text.get_rect()
             textRect.center = (X // 2, Y // 2)
             screen.blit(text, textRect)
+            """
         if keys[pygame.K_3]:
             press_number.__init__(3)
         if keys[pygame.K_4]:
@@ -524,6 +615,7 @@ class Math:
         Card_2.leveler_defined(0, screen)
 
 
+
     def leveler_defined(leveler, screen):
         try:
             if leveler == 0:
@@ -536,10 +628,11 @@ class Math:
                 random.shuffle(level_0a_equa)
                 random.shuffle(level_0a_ans)
                 all_shuffled = level_0a_equa + level_0a_ans
-                card_value = all_shuffled[1]
+                card_1_value = all_shuffled[0]
+                card_2_value = all_shuffled[1]
                 level = '1'
                 leveler = 1
-                return card_value
+                return card_1_value, card_2_value
         except:
             if leveler == 1:
                 pass
@@ -551,6 +644,7 @@ class Math:
 
 
         try:
+
             matched = all_shuffled[0]
             print(matched)
             font = pygame.font.Font('freesansbold.ttf', 60)
@@ -566,29 +660,43 @@ class Math:
             screen.blit(text, textRect)
             print("matched")
             #number = matcher_dict
+
         except:
             #Card_2.leveler_defined(500, screen)
             pass
 
 class press_number:
-    def __int__(self, num):
-        Card_2.leveler_defined(leveler)
-        matched = card_value
-        text = font.render(matched, True, green, blue)
-        surface_1 = pygame.Surface.blit(screen, matched, (100, 50))
-        surface_1.fit(surface_1)
-        textRect = text.get_rect()
-        textRect.center = (X // 2, Y // 2)
-        screen.blit(text, textRect)
+    def __init__(self, num, screen, X, Y):
 
+        Math.leveler_defined(0, screen)
+        #matched = card_value
+        matched = str(100)
+        font = pygame.font.Font('freesansbold.ttf', 60)
+        white = (255, 255, 255)
+        green = (0, 255, 0)
+        blue = (0, 0, 128)
+        text = font.render(matched, True, green, blue)
+        #surface_1 = pygame.Surface.blit(screen, matched, (100, 50))
+        #surface_1.fit(surface_1)
+        textRect = text.get_rect()
+        textRect.center = (X, Y)
+        screen.blit(text, textRect)
         #press_number.image_loader(num)
-        pygame.draw.circle(screen, "red", player_pos+40, 40)
-        pygame.draw.circle(screen, "red", player_pos_2+40, 40)
-        pygame.draw.circle(screen, "green", player_2_pos+40, 40)
+
+        """
+        number = str(100)
+        
+        text = font.render(number, True, green, blue)
+        textRect = text.get_rect()
+        textRect.center = (X + 100, Y + 100)
+        screen.blit(text, textRect)
+        """
+
 
 
     def image_loader(self, num):
-
+        pass
+        """
         one_image = pygame.image.load("1.png")
         one_image = pygame.transform.scale(one_image, (50, 50))
         surface_1 = pygame.Surface.blit(screen, one_image, (100, 50))
@@ -600,7 +708,7 @@ class press_number:
         X = x_list[num]
         Y = y_list[num]
         textRect.center = (X // 2, Y // 2)
-
+        """
 
 
 
