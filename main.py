@@ -1,10 +1,6 @@
-import turtle
 import pygame
 import random
-from tkinter import *
-from tkinter import ttk
-t = turtle.Turtle()
-root = Tk()
+
 def main():
     """
     Runs the program as a whole
@@ -805,114 +801,6 @@ class Draw_shapes:
         _t.circle(radius, extent)
         _t.end_fill()
         _t.speed(0)
-class FeetToMeters:
-
-    def __init__(self, root):
-
-        root.title("Feet to Meters")
-
-        mainframe = ttk.Frame(root, padding="3 3 12 12")
-        mainframe.grid(column=0, row=0, sticky=(N, W, E, S))
-        root.columnconfigure(0, weight=1)
-        root.rowconfigure(0, weight=1)
-
-        self.feet = StringVar()
-        feet_entry = ttk.Entry(mainframe, width=7, textvariable=self.feet)
-        feet_entry.grid(column=2, row=1, sticky=(W, E))
-        self.meters = StringVar()
-
-        ttk.Label(mainframe, textvariable=self.meters).grid(column=2, row=2, sticky=(W, E))
-        ttk.Button(mainframe, text="Calculate", command=self.calculate, width=50).grid(column=3, row=3, sticky=W)
-
-        ttk.Label(mainframe, text="feet").grid(column=3, row=1, sticky=W)
-        ttk.Label(mainframe, text="is equivalent to").grid(column=1, row=2, sticky=E)
-        ttk.Label(mainframe, text="meters").grid(column=3, row=2, sticky=W)
-
-        for child in mainframe.winfo_children():
-            child.grid_configure(padx=5, pady=5)
-
-        feet_entry.focus()
-        root.bind("<Return>", self.calculate)
-
-    def calculate(self, *args):
-        try:
-            value = float(self.feet.get())
-            self.meters.set(int(0.3048 * value * 10000.0 + 0.5) / 10000.0)
-        except ValueError:
-            pass
-
-
-def print_hierarchy(w, depth=0):
-    print(' '*depth + w.winfo_class() + ' w=' + str(w.winfo_width()) + ' h=' + str(w.winfo_height()) + str(w.winfo_x()) + ' y=' + str(w.winfo_y()))
-    for i in w.winfo_children():
-        print_hierarchy(i, depth+1)
-
-class Card:
-
-
-    def __init__(self, root):
-        root.title("Match")
-
-        mainframe = ttk.Frame(root, padding="3 3 12 12")
-        mainframe.grid(column=0, row=0, sticky=(N, W, E, S))
-        root.columnconfigure(0, weight=1)
-        root.rowconfigure(0, weight=1)
-
-        self.feet = StringVar()
-        feet_entry = ttk.Entry(mainframe, width=7, textvariable=self.feet)
-        feet_entry.grid(column=2, row=1, sticky=(W, E))
-        self.meters = StringVar()
-
-        ttk.Label(mainframe, textvariable=self.meters).grid(column=2, row=2, sticky=(W, E))
-        ttk.Button(mainframe, text="Flip", command=self.flipper, width=50).grid(column=3, row=3, sticky=W)
-
-        ttk.Label(mainframe, text="Hola").grid(column=1, row=2, sticky=E)
-        ttk.Label(mainframe, text="Shalom").grid(column=3, row=2, sticky=W)
-
-        for child in mainframe.winfo_children():
-            child.grid_configure(padx=5, pady=5)
-
-        feet_entry.focus()
-        root.bind("<Return>", self.flipper)
-        #Draw_shapes.draw_circle("self", t, 13, -4, 143, 21, 360, "purple", "black")
-
-    def flipper(self, *args):
-        try:
-
-            value = float(self.feet.get())
-            self.meters.set(int(0.3048 * value * 10000.0 + 0.5) / 10000.0)
-            ttk.Button(mainframe, text="Calculate", command=calculate)
-        except ValueError:
-            pass
-
-
-
-
 
 if __name__ == '__main__':
     main()
-#root = Tk()
-#Card(root)
-#FeetToMeters(root)
-
-#content = ttk.Frame(root)
-#button = ttk.Button(content)
-"""
-print(root.winfo_class())
-print(button.winfo_class())
-print(root.winfo_children())
-print(button.winfo_children())
-print(button.winfo_parent())
-print(button.winfo_toplevel())
-print(button.winfo_width())
-print(button.winfo_height())
-print(button.winfo_reqwidth())
-print(button.winfo_reqheight())
-print(button.winfo_x())
-print(button.winfo_y())
-print(button.winfo_rootx())
-print(button.winfo_rooty())
-print(button.winfo_viewable())
-print(root.winfo_viewable())
-"""
-#root.mainloop()
