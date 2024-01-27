@@ -1,6 +1,7 @@
 import pygame
 import random
 
+
 def main():
     """
     Runs the program as a whole
@@ -11,32 +12,28 @@ def main():
     matching_game.__init__('self')
 
 
-
 class matching_game:
     """
     Starts the game
     """
+
     def __init__(self):
-
-
         screen = pygame.display.set_mode((1280, 720))
 
         card_value = str(Math.__init__('self', screen))
-        #card_value = [0,0]
+        # card_value = [0,0]
         pygame.display.set_caption('Show Text')
 
         pygame.display.update()
         clock = pygame.time.Clock()
         running = True
-        #dt = 0
-        #pi = 3.14
+        # dt = 0
+        # pi = 3.14
 
         Players.__init__('self', screen, running, clock, card_value)
 
-        #Card_2.__init__("self", screen)
-        #Card_2.leveler_defined(leveler)
-
-
+        # Card_2.__init__("self", screen)
+        # Card_2.leveler_defined(leveler)
 
 
 class Players:
@@ -44,6 +41,7 @@ class Players:
     Creates the players that are playable. Player 1 can be moved with WASD, and Player 2
     can be played with the arrow keys.
     """
+
     def __init__(self, screen, running, clock, card_value):
         """
         Starts the players
@@ -56,9 +54,8 @@ class Players:
         player_2_pos = pygame.Vector2((screen.get_height() / 4), (screen.get_width() / 4) - 30)
         player_3_pos = pygame.Vector2((screen.get_height() / 2 - 40), (screen.get_width() / 4) - 70)
         player_3_pos_2 = pygame.Vector2((screen.get_width() / 4), (screen.get_height() / 3) - 40)
-        player_4_pos = pygame.Vector2((screen.get_height()*3 / 4), (screen.get_width() / 2) - 70)
-        player_4_pos_2 = pygame.Vector2((screen.get_width()*2 / 4 - 40), (screen.get_height()*7 / 8 + 30) - 100)
-
+        player_4_pos = pygame.Vector2((screen.get_height() * 3 / 4), (screen.get_width() / 2) - 70)
+        player_4_pos_2 = pygame.Vector2((screen.get_width() * 2 / 4 - 40), (screen.get_height() * 7 / 8 + 30) - 100)
 
         while running:
 
@@ -71,11 +68,6 @@ class Players:
             # fill the screen with a color to wipe away anything from last frame
             screen.fill("purple")
 
-
-
-
-
-
             pygame.draw.circle(screen, "red", player_pos, 40)
             pygame.draw.circle(screen, "red", player_pos_2, 40)
             pygame.draw.circle(screen, "green", player_2_pos, 40)
@@ -83,7 +75,6 @@ class Players:
             pygame.draw.circle(screen, "orange", player_3_pos_2, 40)
             pygame.draw.circle(screen, "light blue", player_4_pos, 40)
             pygame.draw.circle(screen, "light blue", player_4_pos_2, 40)
-
 
             keys = pygame.key.get_pressed()
             player_1_y_list = []
@@ -173,19 +164,16 @@ class Players:
                 player_1_y_list.append(player_pos)
                 player_1_2_y_list.append(player_pos_2)
 
-
-            #pygame.draw.circle(screen, "red", player_pos, 40)
-            #pygame.draw.circle(screen, "red", player_pos_2, 40)
-            #pygame.draw.circle(screen, "green", player_2_pos, 40)
+            # pygame.draw.circle(screen, "red", player_pos, 40)
+            # pygame.draw.circle(screen, "red", player_pos_2, 40)
+            # pygame.draw.circle(screen, "green", player_2_pos, 40)
             try:
                 tail_1_x = player_1_x_list[-4]
-                tail_1_y= player_1_y_list[-4]
+                tail_1_y = player_1_y_list[-4]
                 new_player_pos = pygame.Vector2(tail_1_x, tail_1_y)
                 pygame.draw.circle(screen, "red", new_player_pos, 40)
             except:
                 pass
-
-
 
             # flip() the display to put your work on screen
             pygame.display.flip()
@@ -199,11 +187,11 @@ class Players:
         pygame.quit()
         # Ends the game
 
-        #Config_practice.button("")
-        #FeetToMeters(root)
+        # Config_practice.button("")
+        # FeetToMeters(root)
 
         # print_hierarchy(root)
-        #root.mainloop()
+        # root.mainloop()
 
 
 class Math:
@@ -216,9 +204,6 @@ class Math:
         matcher = []
         matcher_dict = {}
         Math.leveler_defined(0, screen)
-
-
-
 
     def leveler_defined(leveler, screen):
 
@@ -254,10 +239,9 @@ class Math:
                 pass
             else:
                 leveler = 0
-                #Card_2.leveler_defined(leveler, screen)
+                # Card_2.leveler_defined(leveler, screen)
 
-        #print(all_shuffled)
-
+        # print(all_shuffled)
 
         try:
 
@@ -275,11 +259,12 @@ class Math:
             textRect.center = (X // 2, Y // 2)
             screen.blit(text, textRect)
             print("matched")
-            #number = matcher_dict
+            # number = matcher_dict
 
         except:
-            #Card_2.leveler_defined(500, screen)
+            # Card_2.leveler_defined(500, screen)
             pass
+
     """
     try:
         card_1_value = all_shuffled[0]
@@ -289,17 +274,18 @@ class Math:
     #print(all_shuffled)
     """
 
-class Card_2(Math):
 
+class Card_2(Math):
     """
     Draws the cards.
     """
+
     def __init__(self, screen, card_value):
         """
         Initiates the card grid method
         :param screen: defines the game screen size.
         """
-        #Card_2.card_grid("self", screen)
+        # Card_2.card_grid("self", screen)
 
         card = Card_2.card_values("self", screen, 1)
         X = Card_2.x_value("self", card)
@@ -349,7 +335,6 @@ class Card_2(Math):
         X = Card_2.x_value("self", card)
         Y = Card_2.y_value("self", card)
         Card_2.card_draw("self", screen, X, Y, card, card_value)
-
 
     def card_values(self, screen, card_value):
         """
@@ -478,8 +463,6 @@ class Card_2(Math):
             W = 590
             press_number.__init__('self', 12, screen, V, W, Math.card_12_value)
 
-
-
     def card_grid(self, screen):
         """
         Creates the cards for play.
@@ -487,16 +470,15 @@ class Card_2(Math):
         :return:
         Displays cards
         """
-        #pygame.draw.line(screen, 'blue', [(screen.get_height() / 2), (base_y_top / 2)], [(screen.get_height() / 2), (base_y_top / 4)], 5)
-        #base_x_top = screen.get_height()
-        #base_y_top = screen.get_width()
+        # pygame.draw.line(screen, 'blue', [(screen.get_height() / 2), (base_y_top / 2)], [(screen.get_height() / 2), (base_y_top / 4)], 5)
+        # base_x_top = screen.get_height()
+        # base_y_top = screen.get_width()
         rect_pos_1 = [10, 10, 250, 200]
         modifier_x = 100
         modifier_y = 100
         card_width = 250
         card_height = 200
         card_number = 0
-
 
         white = (255, 255, 255)
         green = (0, 255, 0)
@@ -511,9 +493,6 @@ class Card_2(Math):
         font = pygame.font.Font('freesansbold.ttf', 50)
         text = font.render(number, True, green, blue)
 
-
-
-
         for i in range(12):
             card_list.append(card_number)
             x_list.append(X)
@@ -522,15 +501,15 @@ class Card_2(Math):
                 modifier_x = 90
                 modifier_y = 25
             if card_number == 1:
-                #modifier_x = 0
-                #modifier_y = 220
+                # modifier_x = 0
+                # modifier_y = 220
                 modifier_x = 280
                 modifier_y = 0
                 one_image = pygame.image.load("1.png")
                 one_image = pygame.transform.scale(one_image, (50, 50))
             if card_number == 2:
-                #modifier_x = 0
-                #modifier_y = 220
+                # modifier_x = 0
+                # modifier_y = 220
                 modifier_x = 280
                 modifier_y = 0
             if card_number == 3:
@@ -572,13 +551,11 @@ class Card_2(Math):
                 modifier_y = 0
 
             card_number += 1
-            X += modifier_x*2
-            Y += modifier_y*2
+            X += modifier_x * 2
+            Y += modifier_y * 2
             rect_pos_changer_x = rect_pos_1[0] + modifier_x
             rect_pos_changer_y = rect_pos_1[1] + modifier_y
             keys = pygame.key.get_pressed()
-
-
 
             card_number_1 += 1
             number = str(card_number_1)
@@ -597,12 +574,8 @@ class Card_2(Math):
             one_image = pygame.transform.scale(one_image, (50, 50))
             zero_image = pygame.transform.scale(zero_image, (200, 100))
 
-
-
-
-
-            #surface_1.fill((50, 50, 50))
-            #rect = surface_1.get_rect()
+            # surface_1.fill((50, 50, 50))
+            # rect = surface_1.get_rect()
 
         card_matched = False
         choices = []
@@ -662,35 +635,36 @@ class Card_2(Math):
             press_number.__init__(11)
         if keys[pygame.K_c]:
             press_number.__init__(12)
-        #Math.__init__("self", screen)
+        # Math.__init__("self", screen)
 
-        #pygame.draw.
-        #pygame.draw.line(screen, 'blue', [base_y_top/8 - 75, base_y_top*0.2],
+        # pygame.draw.
+        # pygame.draw.line(screen, 'blue', [base_y_top/8 - 75, base_y_top*0.2],
         #                 [base_y_top/8 - 75, (base_y_top * 0.05)], 5)
-        #pygame.draw.line(screen, 'blue', [base_y_top/8 + 250 - 100, base_y_top*0.2],
+        # pygame.draw.line(screen, 'blue', [base_y_top/8 + 250 - 100, base_y_top*0.2],
         #                 [base_y_top/8 + 250 - 100, (base_y_top * 0.05)], 5)
-        #pygame.draw.line(screen, 'blue', [base_y_top/8 + 300 - 100, base_y_top*0.2],
+        # pygame.draw.line(screen, 'blue', [base_y_top/8 + 300 - 100, base_y_top*0.2],
         #                 [base_y_top/8 + 300 - 100, (base_y_top * 0.05)], 5)
-        #pygame.draw.line(screen, 'blue', [base_y_top/8 + 550 - 100, base_y_top*0.2],
+        # pygame.draw.line(screen, 'blue', [base_y_top/8 + 550 - 100, base_y_top*0.2],
         #                 [base_y_top/8 + 550 - 100, (base_y_top * 0.05)], 5)
-        #pygame.draw.line(screen, 'blue', [base_y_top/8 + 1000 - 100, (base_y_top * 0.2)],
+        # pygame.draw.line(screen, 'blue', [base_y_top/8 + 1000 - 100, (base_y_top * 0.2)],
         #                 [base_y_top/8 + 1000 - 100, (base_y_top * 0.05)], 5)
-        #pygame.draw.line(screen, 'blue', [base_y_top/8 + 1250 - 100, (base_y_top * 0.2)],
+        # pygame.draw.line(screen, 'blue', [base_y_top/8 + 1250 - 100, (base_y_top * 0.2)],
         #                 [base_y_top/8 + 1250 - 100, (base_y_top * 0.05)], 5)
 
-        #pygame.draw.circle(screen, "red", [(screen.get_height() / 2), (base_y_top / 2)], 40)
+        # pygame.draw.circle(screen, "red", [(screen.get_height() / 2), (base_y_top / 2)], 40)
 
     def card_frame(self):
         pygame.draw.line(screen, 'red', [10, 20], [10, 20], 5)
+
     def zero_plus_zero(self):
-        #pygame.draw.line(screen, 'blue', )
+        # pygame.draw.line(screen, 'blue', )
         pygame.draw.arc(screen, 'red', [10, 10, 250, 200], 6, 7, 2)
 
 
 class press_number(Math):
     def __init__(self, num, screen, X, Y, card_value):
 
-        #card_value = Math.leveler_defined(0, screen)
+        # card_value = Math.leveler_defined(0, screen)
         if num == 1:
             matched = str(Math.card_1_value)
         if num == 2:
@@ -716,29 +690,27 @@ class press_number(Math):
         if num == 12:
             matched = str(Math.card_12_value)
 
-        #matched = str(100)
+        # matched = str(100)
         font = pygame.font.Font('freesansbold.ttf', 60)
         white = (255, 255, 255)
         green = (0, 255, 0)
         blue = (0, 0, 128)
         text = font.render(matched, True, green, blue)
-        #surface_1 = pygame.Surface.blit(screen, matched, (100, 50))
-        #surface_1.fit(surface_1)
+        # surface_1 = pygame.Surface.blit(screen, matched, (100, 50))
+        # surface_1.fit(surface_1)
         textRect = text.get_rect()
         textRect.center = (X, Y)
         screen.blit(text, textRect)
-        #press_number.image_loader(num)
+        # press_number.image_loader(num)
 
         """
         number = str(100)
-        
+
         text = font.render(number, True, green, blue)
         textRect = text.get_rect()
         textRect.center = (X + 100, Y + 100)
         screen.blit(text, textRect)
         """
-
-
 
     def image_loader(self, num):
         pass
@@ -760,47 +732,6 @@ class press_number(Math):
 
 
 
-
-
-
-
-
-class Config_practice:
-    def button(self):
-        print("test")
-        button = ttk.Button(root, text="Hello", command="buttonpressed")
-        button.grid()
-        button['text']
-        l = ttk.Label(root, text= "Starting...")
-        l.grid()
-        l.bind('<Enter>', lambda e: l.configure(text='Moved mouse inside'))
-        l.bind('<Leave>', lambda e: l.configure(text='Moved mouse outside'))
-        l.bind('<ButtonPress-1>', lambda e: l.configure(text='Clicked left mouse button'))
-        l.bind('<3>', lambda e: l.configure(text='Double Clicked'))
-        l.bind('<B3-Motion>', lambda e: l.configure(text='right button drag to %d, %d' % (e.x, e.y)))
-        #root.mainloop()
-        print("test 2")
-
-
-
-class Draw_shapes:
-    def draw_circle(self, _t, _x, _y, tilt, radius, extent, fillcolor, pencolor):
-        """
-        This is the atomic shape circle used for the ball on the sword and the shield in various places throughout.
-        _x, and _y are for coordinates
-        radius is used for the circle size
-        fillcolor is for the color inside of the circles
-        pencolor is for the circle borders
-        """
-        _t.up()
-        _t.goto(_x,_y)
-        _t.setheading(tilt)
-        _t.down()
-        _t.color(pencolor, fillcolor)
-        _t.begin_fill()
-        _t.circle(radius, extent)
-        _t.end_fill()
-        _t.speed(0)
 
 if __name__ == '__main__':
     main()
