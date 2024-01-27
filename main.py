@@ -25,7 +25,8 @@ class matching_game:
 
         screen = pygame.display.set_mode((1280, 720))
 
-        Math.__init__('self', screen)
+        card_value = str(Math.__init__('self', screen))
+        #card_value = [0,0]
         pygame.display.set_caption('Show Text')
 
         pygame.display.update()
@@ -34,7 +35,7 @@ class matching_game:
         #dt = 0
         #pi = 3.14
 
-        Players.__init__('self', screen, running, clock)
+        Players.__init__('self', screen, running, clock, card_value)
 
         #Card_2.__init__("self", screen)
         #Card_2.leveler_defined(leveler)
@@ -47,7 +48,7 @@ class Players:
     Creates the players that are playable. Player 1 can be moved with WASD, and Player 2
     can be played with the arrow keys.
     """
-    def __init__(self, screen, running, clock):
+    def __init__(self, screen, running, clock, card_value):
         """
         Starts the players
         :param screen: This is the game screen, variable set in the matching game class.
@@ -93,7 +94,7 @@ class Players:
             player_1_2_y_list = []
             player_1_x_list = []
             player_1_2_x_list = []
-            Card_2.__init__("self", screen)
+            Card_2.__init__("self", screen, card_value)
 
             if keys[pygame.K_w]:
                 # Moves player 1 up on the screen.
@@ -209,11 +210,95 @@ class Players:
         #root.mainloop()
 
 
-class Card_2:
+class Math:
+    def __init__(self, screen):
+        """
+        Randomizes the position of the equations for the cards
+        :param screen: The screen size.
+        :return:
+        """
+        matcher = []
+        matcher_dict = {}
+        Math.leveler_defined(0, screen)
+
+
+
+
+    def leveler_defined(leveler, screen):
+
+        try:
+            if leveler == 0:
+                level = '0a'
+            if level == '0a'.lower():
+                level_0a_equa = ['0 + 0 =', '0 + 1 =', '0 + 2 =', '0 + 3 =', '0 + 4 =', '0 + 5 =']
+                level_0a_ans = ['0', '1', '2', '3', '4', '5']
+                level_0b_equa = ['0 + 6 =', '0 + 7 =', '0 + 8 =', '0 + 9 =', '0 + 10 =']
+                level_0b_ans = ['6', '7', '8', '9', '10']
+
+                all_shuffled = level_0a_equa + level_0a_ans
+                random.shuffle(all_shuffled)
+
+                Math.card_1_value = all_shuffled[0]
+                Math.card_2_value = all_shuffled[1]
+                Math.card_3_value = all_shuffled[2]
+                Math.card_4_value = all_shuffled[3]
+                Math.card_5_value = all_shuffled[4]
+                Math.card_6_value = all_shuffled[5]
+                Math.card_7_value = all_shuffled[6]
+                Math.card_8_value = all_shuffled[7]
+                Math.card_9_value = all_shuffled[8]
+                Math.card_10_value = all_shuffled[9]
+                Math.card_11_value = all_shuffled[10]
+                Math.card_12_value = all_shuffled[11]
+                level = '1'
+                leveler = 1
+
+        except:
+            if leveler == 1:
+                pass
+            else:
+                leveler = 0
+                #Card_2.leveler_defined(leveler, screen)
+
+        #print(all_shuffled)
+
+
+        try:
+
+            matched = all_shuffled[0]
+            print(matched)
+            font = pygame.font.Font('freesansbold.ttf', 60)
+            green = (0, 255, 0)
+            blue = (0, 0, 128)
+            text = font.render(matched, True, green, blue)
+            surface_1 = pygame.Surface.blit(screen, matched, (100, 50))
+            surface_1.fit(surface_1)
+
+            screen = pygame.surface.Surface((600, 40))
+            textRect = text.get_rect()
+            textRect.center = (X // 2, Y // 2)
+            screen.blit(text, textRect)
+            print("matched")
+            #number = matcher_dict
+
+        except:
+            #Card_2.leveler_defined(500, screen)
+            pass
+    """
+    try:
+        card_1_value = all_shuffled[0]
+        card_2_value = all_shuffled[1]
+    except:
+        card_1_value = 3
+    #print(all_shuffled)
+    """
+
+class Card_2(Math):
+
     """
     Draws the cards.
     """
-    def __init__(self, screen):
+    def __init__(self, screen, card_value):
         """
         Initiates the card grid method
         :param screen: defines the game screen size.
@@ -223,51 +308,51 @@ class Card_2:
         card = Card_2.card_values("self", screen, 1)
         X = Card_2.x_value("self", card)
         Y = Card_2.y_value("self", card)
-        Card_2.card_draw("self", screen, X, Y, card)
+        Card_2.card_draw("self", screen, X, Y, card, card_value)
         card = Card_2.card_values("self", screen, 2)
         X = Card_2.x_value("self", card)
         Y = Card_2.y_value("self", card)
-        Card_2.card_draw("self", screen, X, Y, card)
+        Card_2.card_draw("self", screen, X, Y, card, card_value)
         card = Card_2.card_values("self", screen, 3)
         X = Card_2.x_value("self", card)
         Y = Card_2.y_value("self", card)
-        Card_2.card_draw("self", screen, X, Y, card)
+        Card_2.card_draw("self", screen, X, Y, card, card_value)
         card = Card_2.card_values("self", screen, 4)
         X = Card_2.x_value("self", card)
         Y = Card_2.y_value("self", card)
-        Card_2.card_draw("self", screen, X, Y, card)
+        Card_2.card_draw("self", screen, X, Y, card, card_value)
         card = Card_2.card_values("self", screen, 5)
         X = Card_2.x_value("self", card)
         Y = Card_2.y_value("self", card)
-        Card_2.card_draw("self", screen, X, Y, card)
+        Card_2.card_draw("self", screen, X, Y, card, card_value)
         card = Card_2.card_values("self", screen, 6)
         X = Card_2.x_value("self", card)
         Y = Card_2.y_value("self", card)
-        Card_2.card_draw("self", screen, X, Y, card)
+        Card_2.card_draw("self", screen, X, Y, card, card_value)
         card = Card_2.card_values("self", screen, 7)
         X = Card_2.x_value("self", card)
         Y = Card_2.y_value("self", card)
-        Card_2.card_draw("self", screen, X, Y, card)
+        Card_2.card_draw("self", screen, X, Y, card, card_value)
         card = Card_2.card_values("self", screen, 8)
         X = Card_2.x_value("self", card)
         Y = Card_2.y_value("self", card)
-        Card_2.card_draw("self", screen, X, Y, card)
+        Card_2.card_draw("self", screen, X, Y, card, card_value)
         card = Card_2.card_values("self", screen, 9)
         X = Card_2.x_value("self", card)
         Y = Card_2.y_value("self", card)
-        Card_2.card_draw("self", screen, X, Y, card)
+        Card_2.card_draw("self", screen, X, Y, card, card_value)
         card = Card_2.card_values("self", screen, 10)
         X = Card_2.x_value("self", card)
         Y = Card_2.y_value("self", card)
-        Card_2.card_draw("self", screen, X, Y, card)
+        Card_2.card_draw("self", screen, X, Y, card, card_value)
         card = Card_2.card_values("self", screen, 11)
         X = Card_2.x_value("self", card)
         Y = Card_2.y_value("self", card)
-        Card_2.card_draw("self", screen, X, Y, card)
+        Card_2.card_draw("self", screen, X, Y, card, card_value)
         card = Card_2.card_values("self", screen, 12)
         X = Card_2.x_value("self", card)
         Y = Card_2.y_value("self", card)
-        Card_2.card_draw("self", screen, X, Y, card)
+        Card_2.card_draw("self", screen, X, Y, card, card_value)
 
 
     def card_values(self, screen, card_value):
@@ -300,7 +385,7 @@ class Card_2:
 
         return Y
 
-    def card_draw(self, screen, X, Y, card_number):
+    def card_draw(self, screen, X, Y, card_number, card_value):
         """
         Draws the cards
         :param screen: The screen size
@@ -320,11 +405,17 @@ class Card_2:
         green = (0, 255, 0)
         blue = (0, 0, 128)
         keys = pygame.key.get_pressed()
+        number = str(card_number)
+        font = pygame.font.Font('freesansbold.ttf', 60)
+        text = font.render(number, True, green, blue)
+        textRect = text.get_rect()
+        textRect.center = (X + 120, Y + 100)
+        screen.blit(text, textRect)
 
         if keys[pygame.K_1]:
-            V = 150
+            V = 160
             W = 150
-            press_number.__init__('self', 1, screen, V, W)
+            press_number.__init__('self', 1, screen, V, W, Math.card_1_value)
             """
             number = str(100)
             font = pygame.font.Font('freesansbold.ttf', 60)
@@ -335,9 +426,9 @@ class Card_2:
             """
 
         if keys[pygame.K_2]:
-            V = 150
+            V = 450
             W = 150
-            press_number.__init__('self', 1, screen, V, W)
+            press_number.__init__('self', 2, screen, V, W, Math.card_2_value)
             """
             #V += 100
             #W += 100
@@ -351,52 +442,47 @@ class Card_2:
             screen.blit(text, textRect)
             """
         if keys[pygame.K_3]:
-            V = 150
+            V = 730
             W = 150
-            press_number.__init__('self', 1, screen, V, W)
+            press_number.__init__('self', 3, screen, V, W, Math.card_3_value)
         if keys[pygame.K_4]:
-            V = 150
+            V = 1008
             W = 150
-            press_number.__init__('self', 1, screen, V, W)
+            press_number.__init__('self', 4, screen, V, W, Math.card_4_value)
         if keys[pygame.K_5]:
-            V = 150
-            W = 150
-            press_number.__init__('self', 1, screen, V, W)
+            V = 170
+            W = 370
+            press_number.__init__('self', 5, screen, V, W, Math.card_5_value)
         if keys[pygame.K_6]:
-            V = 150
-            W = 150
-            press_number.__init__('self', 1, screen, V, W)
+            V = 450
+            W = 370
+            press_number.__init__('self', 6, screen, V, W, Math.card_6_value)
         if keys[pygame.K_7]:
-            V = 150
-            W = 150
-            press_number.__init__('self', 1, screen, V, W)
+            V = 730
+            W = 370
+            press_number.__init__('self', 7, screen, V, W, Math.card_7_value)
         if keys[pygame.K_8]:
-            V = 150
-            W = 150
-            press_number.__init__('self', 1, screen, V, W)
+            V = 1008
+            W = 370
+            press_number.__init__('self', 8, screen, V, W, Math.card_8_value)
         if keys[pygame.K_9]:
-            V = 150
-            W = 150
-            press_number.__init__('self', 1, screen, V, W)
+            V = 160
+            W = 590
+            press_number.__init__('self', 9, screen, V, W, Math.card_9_value)
         if keys[pygame.K_z]:
-            V = 150
-            W = 150
-            press_number.__init__('self', 1, screen, V, W)
+            V = 450
+            W = 590
+            press_number.__init__('self', 10, screen, V, W, Math.card_10_value)
         if keys[pygame.K_x]:
-            V = 150
-            W = 150
-            press_number.__init__('self', 1, screen, V, W)
+            V = 730
+            W = 590
+            press_number.__init__('self', 11, screen, V, W, Math.card_11_value)
         if keys[pygame.K_c]:
-            V = 150
-            W = 150
-            press_number.__init__('self', 1, screen, V, W)
+            V = 1008
+            W = 590
+            press_number.__init__('self', 12, screen, V, W, Math.card_12_value)
 
-        number = str(card_number)
-        font = pygame.font.Font('freesansbold.ttf', 60)
-        text = font.render(number, True, green, blue)
-        textRect = text.get_rect()
-        textRect.center = (X + 120, Y + 100)
-        screen.blit(text, textRect)
+
 
     def card_grid(self, screen):
         """
@@ -603,74 +689,38 @@ class Card_2:
     def zero_plus_zero(self):
         #pygame.draw.line(screen, 'blue', )
         pygame.draw.arc(screen, 'red', [10, 10, 250, 200], 6, 7, 2)
-class Math:
-    def __int__(self, screen):
-        """
-        Randomizes the position of the equations for the cards
-        :param screen: The screen size.
-        :return:
-        """
-        matcher = []
-        matcher_dict = {}
-        Card_2.leveler_defined(0, screen)
 
 
+class press_number(Math):
+    def __init__(self, num, screen, X, Y, card_value):
 
-    def leveler_defined(leveler, screen):
-        try:
-            if leveler == 0:
-                level = '0a'
-            if level == '0a'.lower():
-                level_0a_equa = ['0 + 0 =', '0 + 1 =', '0 + 2 =', '0 + 3 =', '0 + 4 =', '0 + 5 =']
-                level_0a_ans = ['0', '1', '2', '3', '4', '5']
-                level_0b_equa = ['0 + 6 =', '0 + 7 =', '0 + 8 =', '0 + 9 =', '0 + 10 =']
-                level_0b_ans = ['6', '7', '8', '9', '10']
-                random.shuffle(level_0a_equa)
-                random.shuffle(level_0a_ans)
-                all_shuffled = level_0a_equa + level_0a_ans
-                card_1_value = all_shuffled[0]
-                card_2_value = all_shuffled[1]
-                level = '1'
-                leveler = 1
-                return card_1_value, card_2_value
-        except:
-            if leveler == 1:
-                pass
-            else:
-                leveler = 0
-                #Card_2.leveler_defined(leveler, screen)
+        #card_value = Math.leveler_defined(0, screen)
+        if num == 1:
+            matched = str(Math.card_1_value)
+        if num == 2:
+            matched = str(Math.card_2_value)
+        if num == 3:
+            matched = str(Math.card_3_value)
+        if num == 4:
+            matched = str(Math.card_4_value)
+        if num == 5:
+            matched = str(Math.card_5_value)
+        if num == 6:
+            matched = str(Math.card_6_value)
+        if num == 7:
+            matched = str(Math.card_7_value)
+        if num == 8:
+            matched = str(Math.card_8_value)
+        if num == 9:
+            matched = str(Math.card_9_value)
+        if num == 10:
+            matched = str(Math.card_10_value)
+        if num == 11:
+            matched = str(Math.card_11_value)
+        if num == 12:
+            matched = str(Math.card_12_value)
 
-        #print(all_shuffled)
-
-
-        try:
-
-            matched = all_shuffled[0]
-            print(matched)
-            font = pygame.font.Font('freesansbold.ttf', 60)
-            green = (0, 255, 0)
-            blue = (0, 0, 128)
-            text = font.render(matched, True, green, blue)
-            surface_1 = pygame.Surface.blit(screen, matched, (100, 50))
-            surface_1.fit(surface_1)
-
-            screen = pygame.surface.Surface((600, 40))
-            textRect = text.get_rect()
-            textRect.center = (X // 2, Y // 2)
-            screen.blit(text, textRect)
-            print("matched")
-            #number = matcher_dict
-
-        except:
-            #Card_2.leveler_defined(500, screen)
-            pass
-
-class press_number:
-    def __init__(self, num, screen, X, Y):
-
-        Math.leveler_defined(0, screen)
-        #matched = card_value
-        matched = str(100)
+        #matched = str(100)
         font = pygame.font.Font('freesansbold.ttf', 60)
         white = (255, 255, 255)
         green = (0, 255, 0)
