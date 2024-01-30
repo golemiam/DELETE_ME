@@ -377,10 +377,10 @@ class Card_2(Math):
         """
         card_width = 250
         card_height = 200
-        rect_pos_1 = [X, Y, card_width, card_height]
+        Card_2.rect_pos_1 = [X, Y, card_width, card_height]
 
-        pygame.draw.ellipse(screen, 'blue', rect_pos_1, 20)
-        pygame.draw.rect(screen, 'blue', rect_pos_1, 20)
+        pygame.draw.ellipse(screen, 'blue', Card_2.rect_pos_1, 20)
+        #pygame.Surface.fill(color='blue', rect=rect_pos_1, special_flags=0)
 
         white = (255, 255, 255)
         green = (0, 255, 0)
@@ -392,6 +392,11 @@ class Card_2(Math):
         textRect = text.get_rect()
         textRect.center = (X + 120, Y + 100)
         screen.blit(text, textRect)
+        #screen = pygame.display.set_mode((1280, 720)) # Just for reference.
+
+
+
+
 
         if keys[pygame.K_1]:
             V = 160
@@ -447,7 +452,7 @@ class Card_2(Math):
             W = 370
             press_number.__init__('self', 8, screen, V, W, Math.card_8_value)
         if keys[pygame.K_9]:
-            V = 160
+            V = 170
             W = 590
             press_number.__init__('self', 9, screen, V, W, Math.card_9_value)
         if keys[pygame.K_z]:
@@ -462,6 +467,11 @@ class Card_2(Math):
             V = 1008
             W = 590
             press_number.__init__('self', 12, screen, V, W, Math.card_12_value)
+
+
+        pygame.draw.rect(screen, 'blue', Card_2.rect_pos_1, 20)
+
+
 
     def card_grid(self, screen):
         """
@@ -556,6 +566,9 @@ class Card_2(Math):
             rect_pos_changer_x = rect_pos_1[0] + modifier_x
             rect_pos_changer_y = rect_pos_1[1] + modifier_y
             keys = pygame.key.get_pressed()
+            pygame.draw.ellipse(screen, 'blue', rect_pos_1, 20)
+            pygame.draw.rect(screen, 'blue', rect_pos_1, 20)
+            pygame.Surface.fill('blue', rect_pos_1)
 
             card_number_1 += 1
             number = str(card_number_1)
@@ -567,8 +580,7 @@ class Card_2(Math):
 
             rect_pos_1 = [rect_pos_changer_x, rect_pos_changer_y, card_width, card_height]
 
-            pygame.draw.ellipse(screen, 'blue', rect_pos_1, 20)
-            pygame.draw.rect(screen, 'blue', rect_pos_1, 20)
+
             one_image = pygame.image.load("1.png")
             zero_image = pygame.image.load("0_image.jpg")
             one_image = pygame.transform.scale(one_image, (50, 50))
@@ -666,6 +678,7 @@ class press_number(Math):
 
         # card_value = Math.leveler_defined(0, screen)
         if num == 1:
+            #card_color_1 = screen.fill(color='white', rect=Card_2.rect_pos_1)
             matched = str(Math.card_1_value)
         if num == 2:
             matched = str(Math.card_2_value)
@@ -698,9 +711,11 @@ class press_number(Math):
         text = font.render(matched, True, green, blue)
         # surface_1 = pygame.Surface.blit(screen, matched, (100, 50))
         # surface_1.fit(surface_1)
+        screen.fill(color='white', rect=Card_2.rect_pos_1)
         textRect = text.get_rect()
         textRect.center = (X, Y)
         screen.blit(text, textRect)
+
         # press_number.image_loader(num)
 
         """
@@ -712,21 +727,6 @@ class press_number(Math):
         screen.blit(text, textRect)
         """
 
-    def image_loader(self, num):
-        pass
-        """
-        one_image = pygame.image.load("1.png")
-        one_image = pygame.transform.scale(one_image, (50, 50))
-        surface_1 = pygame.Surface.blit(screen, one_image, (100, 50))
-        font = pygame.font.Font('freesansbold.ttf', 60)
-        text = font.render(number, True, green, blue)
-        textRect = text.get_rect()
-        x_list.append(X)
-        y_list.append(Y)
-        X = x_list[num]
-        Y = y_list[num]
-        textRect.center = (X // 2, Y // 2)
-        """
 
 
 
