@@ -1,4 +1,5 @@
 import pygame
+import pygame.locals
 import random
 
 
@@ -393,80 +394,80 @@ class Card_2(Math):
         textRect.center = (X + 120, Y + 100)
         screen.blit(text, textRect)
         #screen = pygame.display.set_mode((1280, 720)) # Just for reference.
+        pygame.draw.rect(screen, 'blue', Card_2.rect_pos_1, 20)
 
 
 
 
+        pygame.event.clear()
+        match_condition = 300
 
-        if keys[pygame.K_1]:
-            V = 160
-            W = 150
-            press_number.__init__('self', 1, screen, V, W, Math.card_1_value)
-            """
-            number = str(100)
-            font = pygame.font.Font('freesansbold.ttf', 60)
-            text = font.render(number, True, green, blue)
-            textRect = text.get_rect()
-            textRect.center = (X + 100, Y + 100)
-            screen.blit(text, textRect)
-            """
+        while match_condition > 0:
+            match_condition -= 1
+            #event = pygame.event.wait()
+            if keys[pygame.K_1]:
 
-        if keys[pygame.K_2]:
-            V = 450
-            W = 150
-            press_number.__init__('self', 2, screen, V, W, Math.card_2_value)
-            """
-            #V += 100
-            #W += 100
-            #surface_1 = pygame.Surface.blit(screen, zero_image, (V, W))
-            #surface_1.fit(surface_1)
-            number = str(100)
-            font = pygame.font.Font('freesansbold.ttf', 60)
-            text = font.render(number, True, green, blue)
-            textRect = text.get_rect()
-            textRect.center = (X, Y)
-            screen.blit(text, textRect)
-            """
-        if keys[pygame.K_3]:
-            V = 730
-            W = 150
-            press_number.__init__('self', 3, screen, V, W, Math.card_3_value)
-        if keys[pygame.K_4]:
-            V = 1008
-            W = 150
-            press_number.__init__('self', 4, screen, V, W, Math.card_4_value)
-        if keys[pygame.K_5]:
-            V = 170
-            W = 370
-            press_number.__init__('self', 5, screen, V, W, Math.card_5_value)
-        if keys[pygame.K_6]:
-            V = 450
-            W = 370
-            press_number.__init__('self', 6, screen, V, W, Math.card_6_value)
-        if keys[pygame.K_7]:
-            V = 730
-            W = 370
-            press_number.__init__('self', 7, screen, V, W, Math.card_7_value)
-        if keys[pygame.K_8]:
-            V = 1008
-            W = 370
-            press_number.__init__('self', 8, screen, V, W, Math.card_8_value)
-        if keys[pygame.K_9]:
-            V = 170
-            W = 590
-            press_number.__init__('self', 9, screen, V, W, Math.card_9_value)
-        if keys[pygame.K_z]:
-            V = 450
-            W = 590
-            press_number.__init__('self', 10, screen, V, W, Math.card_10_value)
-        if keys[pygame.K_x]:
-            V = 730
-            W = 590
-            press_number.__init__('self', 11, screen, V, W, Math.card_11_value)
-        if keys[pygame.K_c]:
-            V = 1008
-            W = 590
-            press_number.__init__('self', 12, screen, V, W, Math.card_12_value)
+                    V = 160
+                    W = 150
+                    press_number.__init__('self', 1, screen, V, W, Math.card_1_value)
+
+
+            if keys[pygame.K_2]:
+                V = 450
+                W = 150
+                press_number.__init__('self', 2, screen, V, W, Math.card_2_value)
+                """
+                #V += 100
+                #W += 100
+                #surface_1 = pygame.Surface.blit(screen, zero_image, (V, W))
+                #surface_1.fit(surface_1)
+                number = str(100)
+                font = pygame.font.Font('freesansbold.ttf', 60)
+                text = font.render(number, True, green, blue)
+                textRect = text.get_rect()
+                textRect.center = (X, Y)
+                screen.blit(text, textRect)
+                """
+            if keys[pygame.K_3]:
+                V = 730
+                W = 150
+                press_number.__init__('self', 3, screen, V, W, Math.card_3_value)
+            if keys[pygame.K_4]:
+                V = 1008
+                W = 150
+                press_number.__init__('self', 4, screen, V, W, Math.card_4_value)
+            if keys[pygame.K_5]:
+                V = 170
+                W = 370
+                press_number.__init__('self', 5, screen, V, W, Math.card_5_value)
+            if keys[pygame.K_6]:
+                V = 450
+                W = 370
+                press_number.__init__('self', 6, screen, V, W, Math.card_6_value)
+            if keys[pygame.K_7]:
+                V = 730
+                W = 370
+                press_number.__init__('self', 7, screen, V, W, Math.card_7_value)
+            if keys[pygame.K_8]:
+                V = 1008
+                W = 370
+                press_number.__init__('self', 8, screen, V, W, Math.card_8_value)
+            if keys[pygame.K_9]:
+                V = 170
+                W = 590
+                press_number.__init__('self', 9, screen, V, W, Math.card_9_value)
+            if keys[pygame.K_0]:
+                V = 450
+                W = 590
+                press_number.__init__('self', 10, screen, V, W, Math.card_10_value)
+            if keys[pygame.K_MINUS]:
+                V = 730
+                W = 590
+                press_number.__init__('self', 11, screen, V, W, Math.card_11_value)
+            if keys[pygame.K_EQUALS]:
+                V = 1008
+                W = 590
+                press_number.__init__('self', 12, screen, V, W, Math.card_12_value)
 
 
         pygame.draw.rect(screen, 'blue', Card_2.rect_pos_1, 20)
@@ -703,14 +704,19 @@ class press_number(Math):
         if num == 12:
             matched = str(Math.card_12_value)
 
+
         # matched = str(100)
+
         font = pygame.font.Font('freesansbold.ttf', 60)
         white = (255, 255, 255)
         green = (0, 255, 0)
         blue = (0, 0, 128)
+
+
         text = font.render(matched, True, green, blue)
         # surface_1 = pygame.Surface.blit(screen, matched, (100, 50))
         # surface_1.fit(surface_1)
+        Card_2.rect_pos_1 = [X-110, Y-100, 250, 200]
         screen.fill(color='white', rect=Card_2.rect_pos_1)
         textRect = text.get_rect()
         textRect.center = (X, Y)
@@ -726,6 +732,8 @@ class press_number(Math):
         textRect.center = (X + 100, Y + 100)
         screen.blit(text, textRect)
         """
+
+
 
 
 
